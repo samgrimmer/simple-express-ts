@@ -15,10 +15,3 @@ export const ErrorHandler : express.ErrorRequestHandler =
         LoggerInstance.Error(`error caught in middleware example : error : ${err.message}`);
 
 }
-
-// export const ErrorHandler : express.ErrorRequestHandler = 
-//     async (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-         
-//         LoggerInstance.Error(`error caught in middleware example : error : ${err.message}`);
-
-// }
