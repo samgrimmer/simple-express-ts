@@ -1,0 +1,43 @@
+{
+  "name": "simple-express-ts",
+  "version": "1.0.0",
+  "description": "Simple and clean Express API using Typescript",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/samgrimmer/simple-express-ts.git"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node --inspect=5858 -r ts-node/register src/server.ts",
+    "dev": "./node_modules/nodemon/bin/nodemon.js",
+    "prod": "build && node build/server.js"
+  },
+  "keywords": [
+    "Typescript Express",
+    "Typescript Express Starter Kit"
+  ],
+  "author": "Sam Grimmer",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.9",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.16.0",
+    "@types/mongoose": "^5.2.6",
+    "@types/winston": "^2.4.4",
+    "nodemon": "^1.18.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^2.9.2"
+  }
+}
