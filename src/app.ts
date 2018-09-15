@@ -1,50 +1,42 @@
-import * as express from 'express';
-import * as cors from 'cors';
-import * as bodyParser from 'body-parser';
+import * as express from "express";
+import * as cors from "cors";
+import * as bodyParser from "body-parser";
 
-import { Config } from './config';
-import { LoggerInstance } from './logger'
-import { Route } from './route';
-import { ErrorHandler, RequestHandler } from './middleware';
+import { Config } from "./config";
+import { LoggerInstance } from "./logger";
+import { Route } from "./route";
+import { ErrorHandler, RequestHandler } from "./middleware";
 
 export class App {
+  public express: express.Application;
 
-	public express: express.Application;
+  constructor() {
+    this.express = express();
 
-	constructor() {
+    this.middleware();
+    this.routes();
+    this.customMiddleware();
 
-		this.express = express();
+    this.express.listen(Config.app.port, () => {
+      LoggerInstance.Info(
+        `${Config.app.name} listening on : ${Config.app.port}`
+      );
+    });
+  }
 
-		this.middleware();
-		this.routes();
-		this.customMiddleware();
+  private middleware(): void {
+    this.express.use(cors());
+    this.express.options("*", cors());
+    this.express.use(bodyParser.json());
+    this.express.use(bodyParser.urlencoded({ extended: false }));
+  }
 
-		this.express.listen(Config.app.port, () =>  {
-			LoggerInstance.Info(`${Config.app.name} listening on : ${Config.app.port}`);
-		});
+  private routes(): void {
+    this.express.use("/", new Route().Router);
+  }
 
-	}
-
-	private middleware(): void {
-
-		this.express.use(cors());
-		this.express.options('*', cors());
-		this.express.use(bodyParser.json());
-		this.express.use(bodyParser.urlencoded({extended: false}));
-
-	}
-
-	private routes(): void {
-
-		this.express.use('/', new Route().Router)
-
-	}
-
-	private customMiddleware(): void {
-
-		this.express.use(RequestHandler);
-		this.express.use(ErrorHandler);
-
-	}
-	
+  private customMiddleware(): void {
+    this.express.use(RequestHandler);
+    this.express.use(ErrorHandler);
+  }
 }
