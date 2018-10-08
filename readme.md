@@ -2,7 +2,7 @@
 
 # simple-express-ts
 
-Simple and clean API implementation of Node.js Express Web Framework using Typescript.
+Simple and clean API implementation of Node.js Express Web Framework using Typescript utilising repository pattern with Mongoose orm and Mongo database.
 
 ```npm i```
 
